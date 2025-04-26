@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudflare-r2-dumps
+  namespace: mongodb
+data:
+  oss: cloudflare_r2
+  oss_bucket: <PLACE HOLDER>
+  oss_path: <PLACE HOLDER>
+  mongo_db: <PLACE HOLDER>
+  mongo_col: <PLACE HOLDER>
+  mongo_uri: <PLACE HOLDER>
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudflare-r2-retention
+  namespace: mongodb
+data:
+  retention_period: 30d

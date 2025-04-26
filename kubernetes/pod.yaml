@@ -1,0 +1,71 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongodump-widget
+  namespace: mongodb
+spec:
+  containers:
+    - name: app
+      #image: ghcr.io/kyoobit/mongodump-widget:latest
+      image: docker.io/
+      env:
+        - name: MONGO_RO_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-readonly
+              key: username
+        - name: MONGO_RO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-readonly
+              key: password
+        - name: ENCRYPTION_KEY
+          valueFrom:
+            secretKeyRef:
+              name: data-encryption
+              key: key
+        - name: OSS
+          valueFrom:
+            configMapKeyRef:
+              name: cloudflare-r2-dumps
+              key: oss
+        - name: OSS_BUCKET
+          valueFrom:
+            configMapKeyRef:
+              name: cloudflare-r2-dumps
+              key: oss_bucket
+        - name: OSS_PATH
+          valueFrom:
+            configMapKeyRef:
+              name: cloudflare-r2-dumps
+              key: oss_path
+        - name: MONGO_DB
+          valueFrom:
+            configMapKeyRef:
+              name: cloudflare-r2-dumps
+              key: mongo_db
+        - name: MONGO_COL
+          valueFrom:
+            configMapKeyRef:
+              name: cloudflare-r2-dumps
+              key: mongo_col
+        - name: MONGO_URI
+          valueFrom:
+            configMapKeyRef:
+              name: cloudflare-r2-dumps
+              key: mongo_addr
+        - name: RETENTION_PERIOD
+          valueFrom:
+            configMapKeyRef:
+              name: cloudflare-r2-retention
+              key: retention_period
+      volumeMounts:
+        - name: rclone-config
+          mountPath: "/etc/rclone"
+          readOnly: true
+  volumes:
+    - name: rclone-config
+      secret:
+        secretName: cloudflare-r2-rw
+        #optional: true
