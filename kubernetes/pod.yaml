@@ -20,11 +20,11 @@ spec:
             secretKeyRef:
               name: mongodb-readonly
               key: password
-        - name: ENCRYPTION_KEY
+        - name: ENCRYPTION_PUBLIC_KEY
           valueFrom:
             secretKeyRef:
               name: data-encryption
-              key: key
+              key: public
         - name: OSS
           valueFrom:
             configMapKeyRef:
