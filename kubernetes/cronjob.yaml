@@ -65,7 +65,7 @@ spec:
                   valueFrom:
                     configMapKeyRef:
                       name: cloudflare-r2-dumps
-                      key: mongo_addr
+                      key: mongo_uri
                 - name: RETENTION_PERIOD
                   valueFrom:
                     configMapKeyRef:

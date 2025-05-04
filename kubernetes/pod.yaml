@@ -7,8 +7,7 @@ metadata:
 spec:
   containers:
     - name: app
-      #image: ghcr.io/kyoobit/mongodump-widget:latest
-      image: docker.io/
+      image: ghcr.io/kyoobit/mongodump-widget:latest
       env:
         - name: MONGO_RO_USERNAME
           valueFrom:
@@ -54,7 +53,7 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: cloudflare-r2-dumps
-              key: mongo_addr
+              key: mongo_uri
         - name: RETENTION_PERIOD
           valueFrom:
             configMapKeyRef:
