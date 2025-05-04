@@ -90,9 +90,7 @@ compress_dump() {
     _dump_file_tgz="${DUMP_FILE}.tgz"
 
     log "Packing and compressing database dump files at: ${DUMP_DIR}/${DUMP_FILE}";
-    tar --create --gzip --strip-components=2 \
-    --file="${DUMP_DIR}/${DUMP_FILE}.tgz" \
-    "${DUMP_DIR}/${_dump_file_tgz}";
+    tar --create --gzip --file="${DUMP_DIR}/${_dump_file_tgz}" --strip-components=2 "${DUMP_DIR}/${DUMP_FILE}";
 
     log "Database dump files packed/compressed at: ${DUMP_DIR}/${_dump_file_tgz}";
     log "Removing the unpacked/compressed database dump files at: ${DUMP_DIR}/${DUMP_FILE}";
