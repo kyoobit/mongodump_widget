@@ -48,8 +48,11 @@ check_env_var() {
 
 # Check that the rclone configuration file is available and not empty
 check_dependencies() {
+    log "Checking dependencies";
+
     # Check required environment variables are available
     for var in "${required_vars[@]}"; do
+        log "Checking required environment variable: '${var}'";
         check_env_var "$var";
     done
 
